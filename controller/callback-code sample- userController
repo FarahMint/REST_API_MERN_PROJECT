@@ -1,0 +1,38 @@
+ const User = require("../models/User");
+
+
+module.exports ={
+
+    // root("/")
+    index: (req,res,next)=>{
+        User.find({},(err, users)=>{
+            if(err){
+                next(err);
+            }
+            res.status(200).json(users);
+        })
+    },
+
+    newUser: (req,res,next)=>{
+        console.log(`req body`, req.body);
+
+        const newUser= new User(req.body)
+        console.log(`new user`, newUser);
+
+        newUser.save((err, user)=>{
+            console.log(`err`, err);
+            console.log(`user`, user);
+            // response back so client does not get stuck
+            // 201 = created successfully
+            res.status(201).json(user)
+        });
+    }
+}
+
+/**
+ * we can interact in 3 different way
+ * 
+ * 1- via callback
+ * 2-via Promises
+ * *- vias async await(promises)
+ */

@@ -1,0 +1,37 @@
+ const User = require("../models/User");
+
+
+module.exports ={
+
+    // root("/")
+    index: (req,res,next)=>{
+        User.find({}) // <-- when this finish - 
+        .then(users =>{  //<-- then do smthing
+            res.status(200).json(users);
+        })
+       .catch(err=>{
+            //catch err
+            next(err);
+       })
+    },
+
+    newUser: (req,res,next)=>{
+        const newUser= new User(req.body) 
+        newUser.save() //--> return promise
+        .then(user =>{
+            res.status(201).json(user)
+        })
+        .catch(err=>{
+            next(err);
+        })
+    
+    }
+}
+
+/**
+ * we can interact in 3 different way
+ * 
+ * 1- via callback
+ * 2-via Promises
+ * *- vias async await(promises)
+ */
