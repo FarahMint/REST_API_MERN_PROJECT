@@ -14,7 +14,6 @@ const items = require("./routes/items");
 
 
 //DB config
-// const db= "mongodb://FarahMint:FarahMint123@ds147946.mlab.com:47946/mern-shop";
 const db= `${MONGO_URI}`;
 
 
